@@ -1,0 +1,41 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cucumber:dev-tobedeleted": "cucumber-js src/features/**/*.feature --tags @dev --require-module ts-node/register --require src/step-definitions/**/**/*.ts",
+    "cucumber:smoke-tobedeleted": "cucumber-js src/features/**/*.feature --tags @smoke --require-module ts-node/register --require src/step-definitions/**/**/*.ts",
+    "cucumber:regression-tobedeleted": "cucumber-js src/features/**/*.feature --tags @regression --require-module ts-node/register --require src/step-definitions/**/**/*.ts",
+    "cucumber-compile-tobedeleted": "yarn transpile && cucumber-js",
+    "cucumbernonwindows-foryourknowledge": "COMMON_CONFIG_FILE=env/common.env yarn cucumber-compile",
+    "postcucumbernonwindows-foryourknowledge": "COMMON_CONFIG_FILE=env/common.env ts-node ./src/reporter/cucumber-report.ts",
+    "cucumberwindows-old-tobedeleted": "yarn cucumber-compile",
+    "precucumber": "rimraf reports && mkdir reports && echo {} > reports/report.json",
+    "transpile": "rimraf dist && babel --extensions .ts --out-dir dist src",
+    "cucumber": "yarn transpile && cucumber-js",
+    "cucumber:localhost-nonwindows-foryourknowledge": "NODE_ENV=localhost COMMON_CONFIG_FILE=env/common.env yarn cucumber",
+    "cucumber:production-nonwindows-foryourknowledge": "NODE_ENV=production COMMON_CONFIG_FILE=env/common.env yarn cucumber",
+    "cucumber:localhost": "yarn cucumber",
+    "cucumber:production": "yarn cucumber",
+    "postcucumber": "ts-node ./src/reporter/cucumber-report.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/preset-env": "^7.20.2",
+    "@cucumber/cucumber": "^8.9.1",
+    "@playwright/test": "^1.29.0",
+    "axe-html-reporter": "^2.2.3",
+    "axe-playwright": "^1.1.12",
+    "dotenv": "^16.0.3",
+    "faker": "5.5.3",
+    "playwright": "^1.29.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "cucumber-html-reporter": "^5.5.0"
+  }
+}
